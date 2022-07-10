@@ -34,7 +34,16 @@ module.exports = {
   },
 
   devServer: {
-    open: true
+    open: true ,
+    proxy: {
+      '/': {
+        target: 'http://127.0.0.1:5003',
+        ws: false, // 需要websocket 开启
+        pathRewrite: {
+          '^/': '/'
+        }
+      }
+    }
   },
 
   css: {

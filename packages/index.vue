@@ -171,6 +171,12 @@
                        style="padding: 0 10px;">
             <form-config :data="widgetForm"></form-config>
           </el-tab-pane>
+          <el-tab-pane label="表格属性"
+                       name="table"
+                       lazy
+                       style="padding: 0 10px;">
+            <table-config :data="widgetFormSelect"></table-config>
+          </el-tab-pane>
         </el-tabs>
       </el-aside>
       <!-- 弹窗 -->
@@ -299,11 +305,12 @@ import Draggable from 'vuedraggable'
 
 import WidgetForm from './WidgetForm'
 import FormConfig from './FormConfig'
+import TableConfig from './TableConfig'
 import WidgetConfig from './WidgetConfig'
 
 export default {
   name: "FormDesign",
-  components: { Draggable, MonacoEditor, WidgetForm, FormConfig, WidgetConfig },
+  components: { Draggable, MonacoEditor, WidgetForm, FormConfig, WidgetConfig,TableConfig },
   mixins: [history],
   props: {
     options: {
@@ -328,7 +335,7 @@ export default {
     },
     showGithubStar: {
       type: Boolean,
-      default: true
+      default: false
     },
     toolbar: {
       type: Array,
