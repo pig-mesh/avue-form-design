@@ -348,7 +348,7 @@ export default {
   },
   methods: {
     getDynamicDataSources() {
-      this.$axios.get("/dsconf/list").then((res) => {
+      this.$axios.get("/gen/dsconf/list").then((res) => {
         this.dsNameOptions = res.data.data;
       });
     },
@@ -384,7 +384,7 @@ export default {
 
       if (name == "sql" && !this.data.dicQueryConfig) {
         this.data.dicQueryConfig = [];
-        this.data.dicUrl = "/dynamic/dynamic-query";
+        this.data.dicUrl = "/gen/dynamic/dynamic-query";
         this.data.dicMethod = "post";
       }
     },
