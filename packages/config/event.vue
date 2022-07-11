@@ -69,7 +69,7 @@ export default {
       focus: '',
       blur: '',
       options: {
-        fullScreen: true,
+        fullScreen: false,
         minimap: {
           enabled: false,
         },

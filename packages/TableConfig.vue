@@ -31,7 +31,7 @@
               style="width: 100%"
             ></el-input-number>
           </el-form-item>
-          <el-form-item label="是否可见">
+          <el-form-item label="是否隐藏">
             <el-switch v-model="data.hide"></el-switch>
           </el-form-item>
           <el-form-item label="是否搜索">

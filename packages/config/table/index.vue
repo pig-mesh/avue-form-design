@@ -124,7 +124,7 @@ export default {
   data() {
     return {
       options: {
-        fullScreen: true,
+        fullScreen: false,
         minimap: {
           enabled: false,
         },

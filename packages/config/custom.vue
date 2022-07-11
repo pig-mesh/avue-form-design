@@ -34,7 +34,7 @@ export default {
       params: this.data.params || {},
       event: this.data.event || {},
       options: {
-        fullScreen: true,
+        fullScreen: false,
         minimap: {
           enabled: false,
         },

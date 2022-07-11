@@ -234,7 +234,7 @@ export default {
         }]
       },
       options: {
-        fullScreen: true,
+        fullScreen: false,
         minimap: {
           enabled: false,
         },

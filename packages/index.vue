@@ -138,6 +138,11 @@
                        size="medium"
                        icon="el-icon-view"
                        @click="handlePreview">预览</el-button>
+            <el-button
+                       type="text"
+                       size="medium"
+                       icon="el-icon-check"
+                       @click="handleGenerate">完成</el-button>
             <el-button v-if="toolbar.includes('clear')"
                        class="danger"
                        type="text"
