@@ -378,14 +378,29 @@ export default {
       }
     },
     handleTabClick({ name }) {
+      if (name == "static") {
+        this.data.dicData = [{ label: "选项一", value: "0" }];
+      }
+
       if (name == "remote" && !this.data.dicQueryConfig) {
         this.data.dicQueryConfig = [];
+        delete this.data.dicData;
       }
 
       if (name == "sql" && !this.data.dicQueryConfig) {
         this.data.dicQueryConfig = [];
+        delete this.data.dicData;
         this.data.dicUrl = "/gen/dynamic/dynamic-query";
         this.data.dicMethod = "post";
+
+
+        if (this.data.dicQuery && this.data.dicQuery.sql) {
+          this.data.sql = this.data.dicQuery.sql;
+        }
+
+        if (this.data.dicQuery.dsName && this.data.dicQuery.dsName) {
+          this.data.dsName = this.data.dicQuery.dsName;
+        }
       }
     },
   },
