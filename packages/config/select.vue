@@ -100,7 +100,7 @@
               ></monaco-editor>
             </p>
           </el-tab-pane>
-          <el-tab-pane label="SQL数据" name="sql" v-if="dsNameOptions">
+          <el-tab-pane label="SQL数据" name="sql">
             <p>
               数据源
               <el-select placeholder="请选择数据源" v-model="data.dsName">
@@ -118,6 +118,7 @@
               <monaco-editor
                 v-model="data.sql"
                 height="80"
+                :key="Math.random()"
                 :keyIndex="`dict-formatter-${data.prop}`"
                 :options="options"
               ></monaco-editor>
@@ -127,6 +128,7 @@
               <monaco-editor
                 v-model="dicFormatter"
                 height="80"
+                :key="Math.random()"
                 :keyIndex="`dict-formatter-${data.prop}`"
                 :options="options"
               ></monaco-editor>
@@ -305,7 +307,6 @@ export default {
         ],
       },
       options: {
-        fullScreen: false,
         minimap: {
           enabled: false,
         },
@@ -392,7 +393,6 @@ export default {
         delete this.data.dicData;
         this.data.dicUrl = "/gen/dynamic/dynamic-query";
         this.data.dicMethod = "post";
-
 
         if (this.data.dicQuery && this.data.dicQuery.sql) {
           this.data.sql = this.data.dicQuery.sql;
