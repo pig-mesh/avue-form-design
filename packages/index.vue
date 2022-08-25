@@ -530,6 +530,7 @@ export default {
     // 导入JSON - 弹窗 - 确定
     handleImportJsonSubmit() {
       try {
+
         this.transAvueOptionsToFormDesigner(this.importJson).then(res => {
           this.widgetForm = res
           this.importJsonVisible = false

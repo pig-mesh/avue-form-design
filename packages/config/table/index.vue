@@ -46,16 +46,16 @@
       <div class="el-form-item">
         <label class="el-form-item__label" style="padding: 0;">
           <el-popover
-            placement="top-start"
-            :width="200"
-            trigger="hover"
-            content="填写以上配置后会自动生成，若觉得生成的不对请自行修改或关闭自动生成"
+              placement="top-start"
+              :width="200"
+              trigger="hover"
+              content="填写以上配置后会自动生成，若觉得生成的不对请自行修改或关闭自动生成"
           >
             <template #reference>
               <el-link
-                href="https://avuejs.com/form/form-input-table.html"
-                :underline="false"
-                target="_blank"
+                  href="https://avuejs.com/form/form-input-table.html"
+                  :underline="false"
+                  target="_blank"
               >
                 onLoad：
                 <i class="el-icon-question"></i>
@@ -65,10 +65,10 @@
         </label>
         <div class="el-form-item__content">
           <monaco-editor
-            v-model="onLoad"
-            height="200"
-            :keyIndex="`table-onload-${data.prop}`"
-            :options="options"
+              v-model="onLoad"
+              height="200"
+              :keyIndex="`table-onload-${data.prop}`"
+              :options="options"
           ></monaco-editor>
         </div>
       </div>
@@ -76,10 +76,10 @@
         <label class="el-form-item__label" style="padding: 0;">formatter：</label>
         <div class="el-form-item__content">
           <monaco-editor
-            v-model="formatter"
-            height="200"
-            :keyIndex="`table-formatter-${data.prop}`"
-            :options="options"
+              v-model="formatter"
+              height="200"
+              :keyIndex="`table-formatter-${data.prop}`"
+              :options="options"
           ></monaco-editor>
         </div>
       </div>
@@ -94,14 +94,19 @@ import AfdColumn from './column.vue'
 
 export default {
   name: 'config-table',
-  components: { MonacoEditor, AfdColumn },
+  components: {MonacoEditor, AfdColumn},
   props: ['data'],
   watch: {
     'data.prop': {
       handler() {
-        const { onLoad, formatter } = this.data
+        const {onLoad} = this.data
         this.onLoad = onLoad ? onLoad + '' : ''
-        this.formatter = formatter ? formatter + '' : ''
+      },
+      immediate: true
+    },
+    formatter: {
+      handler(val) {
+        this.handleFormatter(val)
       },
       immediate: true
     },
@@ -134,25 +139,31 @@ export default {
     }
   },
   methods: {
+    handleFormatter(obj) {
+      this.formatter = obj ? obj + '' : `(row) => {
+        return row.name
+      }`;
+      this.data.formatter = eval(this.formatter)
+    },
     handleColumn(column) {
       this.data.children.column = column
     },
     handleOnLoad(obj) {
-      const { url, method, needPage, currentPageKey, pageSizeKey, totalKey, recordsKey, resKey, auto } = obj
+      const {url, method, needPage, currentPageKey, pageSizeKey, totalKey, recordsKey, resKey, auto} = obj
       if (!auto) return
       if (!url) {
         this.onLoad = `(res, cb) => { }`
         return
       }
-      let { props } = this.data
-      if (!props) props = { label: 'label', value: 'value' }
-      const { value } = props
+      let {props} = this.data
+      if (!props) props = {label: 'label', value: 'value'}
+      const {value} = props
       const onLoad = `(res, cb) => {
         let { page, value, data } = res
         if (!page) page = { currentPage: 1, pageSize: 10 }
         const { currentPage, pageSize } = page
         let params = { ...data, ${currentPageKey || 'current'}: currentPage, ${pageSizeKey || 'page'}: pageSize }
-        
+
         if (value) params['${value}'] = value
 
         if ('${method || 'get'}' == 'get') params = { params: { ...params } }

@@ -232,9 +232,6 @@ export default [
           auto: true
         }
       },
-      formatter: (row) => {
-        return row.name
-      },
       props: {
         label: 'name',
         value: 'id'
